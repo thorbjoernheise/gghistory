@@ -1,25 +1,24 @@
-from sqlalchemy import Column, Integer, String, Date, create_engine, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
+# models.py
+from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class law(Base):
+class Law(Base):
     __tablename__ = 'law'
-    lawid = Column(Integer, primary_key=True)
+    lawid = Column(Integer, primary_key=True, autoincrement=True)
     lawtitle = Column(String)
     lawcode = Column(String)
     verabschiedet = Column(Date)
-    
 
-class fullfetch(Base):
-    __tablename__ = 'fullfetch'
+class Lawcontents(Base):
+    __tablename__ = 'Lawcontents'
     lawid = Column(Integer, ForeignKey('law.lawid'), primary_key=True)
     section = Column(String)
     content = Column(String)
     datum = Column(Date)
-    law = relationship("law")
-
+    law = relationship("Law")
 
 class Revision(Base):
     __tablename__ = 'revisionen'
@@ -29,21 +28,13 @@ class Revision(Base):
     content = Column(String)
     datum = Column(Date)
     bgblid = Column(String, ForeignKey('bgbl.bgblid'))
-    law = relationship("law")
-    bgbl = relationship("bgbl")
+    law = relationship("Law")
+    bgbl = relationship("Bgbl")
     bgblfundstelle = Column(String)
 
-class bgbl(Base):
+class Bgbl(Base):
     __tablename__ = 'bgbl'
     bgblid = Column(String, primary_key=True)
     bgbldate = Column(Date)
     bgblcontent = Column(String)
     bgblpath = Column(String)
-
-
-# Erstellen Sie eine SQLite-Datenbank und eine Sitzung
-engine = create_engine('sqlite:///law.db')
-Session = sessionmaker(bind=engine)
-
-# Erstellen Sie die Tabellen
-Base.metadata.create_all(engine)

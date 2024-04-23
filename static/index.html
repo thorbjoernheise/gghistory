@@ -5,16 +5,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/static/style.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Einträge hinzufügen</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+
     <script>
         function submitForm(event, url, formId) {
             event.preventDefault();
             const data = new FormData(event.target);
             const value = Object.fromEntries(data.entries());
+            // Umwandlung von \n in <br> Tags im 'content' Feld
+            value.content = value.content.replace(/\n/g, '<br>');
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -36,90 +41,7 @@
         }
     </script>
 <style>
-    body {
-        background-color: #282c34;
-        color: #abb2bf;
-        font-family: "Inter", sans-serif;
-        margin: 0;
-        padding: 0;
-    }
 
-    .container {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #282c34; /* Hintergrundfarbe anpassen */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    h1 {
-        color: #c678dd; /* Überschriftfarbe anpassen */
-        text-align: center;
-        margin-bottom: 20px; /* Abstand unter der Überschrift hinzufügen */
-    }
-
-    form {
-        margin-bottom: 20px;
-    }
-
-    label {
-        color: #abb2bf;
-    }
-
-    input[type="text"]:not(:focus),
-    input[type="date"]:not(:focus),
-    input[type="number"]:not(:focus),
-    textarea:not(:focus) {
-        background-color: #2b2e37; /* Hintergrundfarbe anpassen */
-        color: #abb2bf;
-        border: 1px solid #4b5263; /* Rahmenfarbe hinzufügen */
-        border-radius: 5px;
-        padding: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    input[type="text"]:focus,
-    input[type="date"]:focus,
-    input[type="number"]:focus,
-    textarea:focus {
-        background-color: #383c4a; /* Hintergrundfarbe anpassen */
-        color: #ffffff;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        border-radius: 5px;
-        padding: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    input[type="submit"] {
-        background-color: #c678dd; /* Lila Farbe anpassen */
-        color: #ffffff;
-        border: none;
-        padding: 12px 24px; /* Größe des Buttons anpassen */
-        cursor: pointer;
-        border-radius: 5px;
-        display: block; /* Button als Blockelement anzeigen */
-        margin: 0 auto; /* Zentriert den Button */
-        margin-top: 2rem;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #a67dff; /* Lila Farbe anpassen */
-    }
-
-    textarea {
-        height: 100px;
-        width: 100%;
-        box-sizing: border-box;
-        resize: none; /* Verhindern, dass das Textfeld vergrößert werden kann */
-    }
 </style>
 
 </head>

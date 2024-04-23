@@ -1,0 +1,95 @@
+body {
+    background-color: #282c34;
+    color: #abb2bf;
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #c678dd;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #abb2bf;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #4b5263;
+}
+
+th {
+    background-color: #383c4a;
+}
+
+input[type="text"]:not(:focus),
+input[type="date"]:not(:focus),
+input[type="number"]:not(:focus),
+textarea:not(:focus) {
+    background-color: #2b2e37;
+    color: #abb2bf;
+    border: 1px solid #4b5263;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    background-color: #383c4a;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+input[type="submit"] {
+    background-color: #c678dd;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+input[type="submit"]:hover {
+    background-color: #a67dff;
+}
+
+textarea {
+    height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #282c34;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

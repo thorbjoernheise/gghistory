@@ -7,6 +7,11 @@ from models import Law, Lawcontents, Revision, Bgbl, Base
 from schemas import LawCreate, Law, Lawcontents, Revision, Bgbl
 from typing import List
 import models
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
+from starlette.staticfiles import StaticFiles
+
+
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -60,5 +65,33 @@ def get_lawcontents(lawid: int, db: Session = Depends(get_db)):
     lawcontents = db.query(models.Lawcontents).filter(models.Lawcontents.lawid == lawid).all()
     return lawcontents
 
-# Serve index.html from main directory
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+# Get revision by lawid
+@app.get("/revisions/{lawid}", response_model=List[Revision])
+def get_revisions(lawid: int, db: Session = Depends(get_db)):
+    revisions = db.query(models.Revision).filter(models.Revision.lawid == lawid).all()
+    return revisions
+
+'''
+Static Files (HTML, CSS, JS)
+'''
+
+# Serve index.html from /static folder to path /
+@app.get("/", response_class=HTMLResponse)
+async def get_index():
+    try:
+        with open("static/index.html", "r") as file:
+            return file.read()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Index file not found")
+
+# Serve overview.html from /static folder to path /overview
+@app.get("/overview", response_class=HTMLResponse)
+async def get_overview():
+    try:
+        with open("static/overview.html", "r") as file:
+            return file.read()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Overview file not found")
+    
+    # Serve style.css so all served html can use it
+app.mount("/static", StaticFiles(directory="static"), name="static")

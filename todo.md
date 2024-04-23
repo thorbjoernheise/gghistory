@@ -2,11 +2,12 @@
 
 ## Frontend
 ### UI
+- List of Laws erstellen X
 - Gesetzestemplate erstellen
 
 ### Admin-Panel
 - Dashboard bauen
-- Übersicht hinzufügen
+- Übersicht hinzufügen 
 - Löschfunktionen
 - Editierfunktionen
 

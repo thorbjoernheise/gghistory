@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Laws</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>List of Laws</h1>
+    <table id="lawsTable">
+        <thead>
+        <tr>
+            <th>Law ID</th>
+            <th>Law Title</th>
+            <th>Law Code</th>
+            <th>Date Passed</th>
+        </tr>
+        </thead>
+        <tbody id="lawsTableBody">
+        <!-- Table body will be populated dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fetch data from the API
+    fetch('../laws/')
+        .then(response => response.json())
+        .then(data => {
+            // Populate the table with fetched data
+            const tableBody = document.getElementById('lawsTableBody');
+            data.forEach(law => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = law.lawid;
+                row.insertCell().textContent = law.lawtitle;
+                row.insertCell().textContent = law.lawcode;
+                row.insertCell().textContent = law.verabschiedet;
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+</body>
+</html>
